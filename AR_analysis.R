@@ -563,7 +563,7 @@ plot_prob_auc_rna <- plot_prob_threshold(data = data, outcome = "trans_cat",
                                          predictor = "AUC_RNA", xlabel = 'RNA')
 
 ## import the Excel Table > MS Paint PNG file
-image <- figpatch::fig("//cdc.gov/adp/FCID_DVRD_2_FLU/PATHOGENESIS TEAM/1Joanna/Lab/AR/Figures/Figure_5C_table-heatmap.png")
+image <- figpatch::fig("R_inputs/Figure_5C_table-heatmap.png")
 
 ## patchwork
 plot_auc_probs <- ((plot_prob_auc_pfu / plot_prob_auc_rna) | image) + plot_annotation(tag_levels = 'A')
