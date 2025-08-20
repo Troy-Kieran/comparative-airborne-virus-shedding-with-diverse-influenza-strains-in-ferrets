@@ -1,8 +1,53 @@
 ## Overview
-Pulit-Penaloza et al. Comparative Evaluation of Pathogenesis and Airborne Virus Shedding in Ferrets Infected with Diverse Influenza Virus Strains R code.
+R code used to perform statistical analyses and create figures as part of this project and manuscript. 
+
+## Code Usage
+AR_analysis.R script is self contained. Requires the relevent R packages installed, found in the script and in the section below. Input CSV data file if provided.
+
+## Manuscript
+Pulit-Penaloza JA, Kieran TJ, Brock N, Belser JA, Sun X, Zeng H, Pappas C, De La Cruz JA, Hatta Y, Di H, Davis CT, Tumpey TM, Maines TR. (Under Review). Comparative evaluation of airborne virus shedding in ferrets infected with diverse influenza virus strains.
 
 ## Manuscript Abstract
 Recent zoonotic outbreaks of highly pathogenic avian influenza A(H5N1) viruses in North America, particularly those linked to poultry and cattle, have underscored the urgent need to assess the pandemic potential of emerging strains. In this study, we investigated the pathogenesis, transmission dynamics, and airborne virus shedding of two B3.13 and two D1.1 genotype A(H5N1) viruses isolated from humans in 2024 using the ferret model. All four viruses caused severe, rapidly progressing systemic disease with high mortality following intranasal inoculation. One B3.13 genotype virus transmitted efficiently in the presence of direct contact, resulting in fatal outcomes in all exposed ferrets, whereas one D1.1 genotype virus showed limited transmission, with one of three contacts developing clinical signs of infection and another seroconverting to the challenge virus. None of the four strains tested transmitted via respiratory droplets. To better understand the relationship between viral replication and transmission potential, we conducted aerosol sampling using two air collection platforms (BC251 and SPOT) and expanded our virus panel to include additional A(H5N1), A(H9N2), A(H7N9), and A(H1N1)pdm09 strains with known differences in airborne transmissibility. Quantitative analysis of nasal wash and air samples revealed a strong correlation between viral loads in the respiratory tract and levels of airborne virus shedding, particularly for viruses known to transmit efficiently in ferrets. Although not airborne-transmissible in this study, B3.13 viruses exhibited significantly higher predicted airborne transmission potential than D1.1 viruses, based on greater amounts of infectious virus detected in the air, consistent with previously tested B3.13 strains that demonstrated limited airborne spread in the ferret model. These findings highlight the value of integrating quantitative measurements of virus shedding in the air with observed transmission outcomes to improve the resolution of pandemic risk assessments. This approach can help identify zoonotic influenza viruses that may be undergoing adaptation toward mammalian transmissibility, even in the absence of detectable airborne spread.
+
+## Verified versions used
+R version 4.4.0 (2024-04-24 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 26100)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_United States.utf8  LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8 LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.utf8    
+
+time zone: America/New_York
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] patchwork_1.3.0 tidylog_1.1.0   lubridate_1.9.3 forcats_1.0.0   stringr_1.5.1  
+ [6] dplyr_1.1.4     purrr_1.0.2     readr_2.1.5     tidyr_1.3.1     tibble_3.2.1   
+[11] ggplot2_3.5.1   tidyverse_2.0.0
+
+loaded via a namespace (and not attached):
+ [1] gtable_0.3.5      compiler_4.4.0    Rcpp_1.0.13       tidyselect_1.2.1 
+ [5] magick_2.8.5      scales_1.3.0      figpatch_0.3.0    R6_2.5.1         
+ [9] generics_0.1.3    munsell_0.5.1     pillar_1.10.2     tzdb_0.4.0       
+[13] rlang_1.1.4       stringi_1.8.4     timechange_0.3.0  cli_3.6.3        
+[17] withr_3.0.1       magrittr_2.0.3    grid_4.4.0        rstudioapi_0.16.0
+[21] hms_1.1.3         clisymbols_1.2.0  lifecycle_1.0.4   vctrs_0.6.5      
+[25] glue_1.8.0        farver_2.1.2      colorspace_2.1-1  tools_4.4.0      
+[29] pkgconfig_2.0.3  
+
+Other:
+ragg_1.3.3
+rstatix_0.7.2
+figpatch_0.3.0
+
 
 ##
 ##
