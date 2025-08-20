@@ -2,7 +2,7 @@
 R code used to perform statistical analyses and create figures as part of this project and manuscript. 
 
 ## Code Usage
-AR_analysis.R script is self contained. Requires the relevent R packages installed, found in the script and in the section below. Input CSV data file if provided.
+AR_analysis.R script is self contained. Requires the relevent R packages installed, found in the script and in the section below. Input CSV data file if provided in the R_inputs directory.
 
 ## Manuscript
 Pulit-Penaloza JA, Kieran TJ, Brock N, Belser JA, Sun X, Zeng H, Pappas C, De La Cruz JA, Hatta Y, Di H, Davis CT, Tumpey TM, Maines TR. (Under Review). Comparative evaluation of airborne virus shedding in ferrets infected with diverse influenza virus strains.
