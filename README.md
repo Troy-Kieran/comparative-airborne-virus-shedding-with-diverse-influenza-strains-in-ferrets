@@ -2,7 +2,7 @@
 R code used to perform statistical analyses and create figures as part of this research study and manuscript on the comparative evaluation of airborne influenza virus shedding in ferrets. 
 
 ## Code Usage
-Source_Data directory contains the source data used to make manuscript Figure 1, created in GraphPad Prisim v10.5.0, as well as for supplemental figures 1 and 2, along with a PNG file for import and use with figpatch in R and all other source data for analysis and figure creation in R. 
+Source_Data directory contains the source data used to make manuscript Figure 1, created in GraphPad Prisim v10.5.0, as well as for supplemental figures 1 and 2 (Figures_1_S1_S2_source_data.xlsx), along with a PNG file for import and use with figpatch in R (Figure_5C_table-heatmap.png), and all other source data for analysis and figure creation in R (FullData.csv). 
 
 AR_analysis.R script is self contained. Requires the relevent R packages installed, found in the script and in the section below. Whole script should only take a few minutes to run. However, output commands such as figure outputs using ragg has been commented out to make the output of figure files optional.  
 
