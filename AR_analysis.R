@@ -15,7 +15,7 @@ library(patchwork)
 ########################################################################################
 ### Import Data
 
-norm_data <- read.csv("R_inputs/fullData_normalized.csv", header = TRUE, check.names = FALSE)
+norm_data <- read.csv("Source_Data/FullData.csv", header = TRUE, check.names = FALSE)
 ## drop added row number column
 norm_data <- norm_data[, -1]
 
@@ -119,7 +119,7 @@ norm_data %>%
 
 ## inoculated and contact titer data
 ## converted RDT day 9 blanks to 3 and NC to blank (NA)
-air <- read.csv("R_inputs/Figure_1_source_data_air.csv", header = TRUE, check.names = FALSE)
+air <- read.csv("Source_Data/Figure_1_source_data_air.csv", header = TRUE, check.names = FALSE)
 
 air <- air %>% 
   pivot_longer(cols = c(d1:d9), names_to = "day", values_to = "PFU") %>%
@@ -185,7 +185,7 @@ air %>%
 ###
 
 ## tissue titer data
-tis <- read.csv("R_inputs/Figure_1_source_data_tissue.csv", header = TRUE, check.names = FALSE)
+tis <- read.csv("Source_Data/Figure_1_source_data_tissue.csv", header = TRUE, check.names = FALSE)
 
 virus_order  <- c("CO137", "CA147", "WA239", "BC")
 
@@ -717,7 +717,7 @@ plot_prob_auc_rna <- plot_prob_threshold(data = data, outcome = "trans_cat",
                                          predictor = "AUC_RNA", xlabel = 'RNA')
 
 ## import the Excel Table > MS Paint PNG file
-image <- figpatch::fig("R_inputs/Figure_5C_table-heatmap.png")
+image <- figpatch::fig("Source_Data/Figure_5C_table-heatmap.png")
 
 ## patchwork
 plot_auc_probs <- ((plot_prob_auc_pfu / plot_prob_auc_rna) | image) + plot_annotation(tag_levels = 'a')
@@ -1417,3 +1417,4 @@ ggplot(norm_data2, aes(x = RNA_NW, y = RNA_Air, color = factor(ferret))) +
 ##########################################################################################
 
 ##########################################################################################
+
