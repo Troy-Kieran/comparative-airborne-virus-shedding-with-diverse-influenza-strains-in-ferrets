@@ -115,123 +115,7 @@ norm_data %>%
 
 ### FIGURE 1
 
-## R recreation of the figure from GraphPad Prisim
-
-## inoculated and contact titer data
-## converted RDT day 9 blanks to 3 and NC to blank (NA)
-air <- read.csv("Source_Data/Figure_1_source_data_air.csv", header = TRUE, check.names = FALSE)
-
-air <- air %>% 
-  pivot_longer(cols = c(d1:d9), names_to = "day", values_to = "PFU") %>%
-  mutate(PFU = log10(PFU),
-         genotype = as.factor(genotype),
-         group = as.factor(group),
-         pair_id = str_extract(ferret, "\\d+"),
-         pair_id = paste0("pair", pair_id) ) 
-
-air$day <- as.numeric(str_remove_all(air$day, "[^0-9]"))
-
-## define the desired x order
-x_levels <- c("Inoc_1","Inoc_3","Inoc_5","Inoc_7",
-              "DCT_1","DCT_3","DCT_5","DCT_7","DCT_9",
-              "RDT_1","RDT_3","RDT_5","RDT_7","RDT_9")
-
-air <- air %>%
-  mutate(x_key = factor(paste(expt, day, sep = "_"), levels = x_levels))
-
-name_map <- c(A = "CO/137", B = "CO/137", C = "CA/147",
-              D = "WA/239", E = "WA/239", 'F' = "BC/PHL",
-              'Genotype B3.13' = "Genotype B3.13",
-              'Genotype D1.1' = "Genotype D1.1")
-
-air %>%
-  filter(group %in% c("A", "B", "C")) %>%
-  drop_na(x_key) %>%
-  ggplot(aes(x = x_key, y = PFU, fill = interaction(group, pair_id), group = pair_id)) +
-  stat_summary(fun = mean, geom = "bar", width = 0.7,
-               position = position_dodge2(preserve = "single")) +
-  geom_hline(yintercept = 1, linetype = "dotted", linewidth = 1, color = 'red3') +
-  geom_vline(xintercept = 4.5, linetype = "dashed") +
-  facet_grid(rows = vars(genotype), cols = vars(group), scales = "free_x",
-             drop = TRUE, labeller = as_labeller(name_map), switch = "y") +
-  scale_fill_viridis_d(name = "ferret", end = 0.95, option = "mako") +
-  ## nested guide split expt_day
-  scale_x_discrete(name = "Day",
-                   guide = ggh4x::guide_axis_nested(delim = "_")) +
-  scale_y_continuous(breaks = c(0:7)) +
-  labs(y = "Viral Titers (log10 PFU / ml)") +
-  theme_bw() +
-  theme(legend.position = "none") #-> geno_b
-
-air %>%
-  filter(group %in% c("D", "E", "F")) %>%
-  drop_na(x_key) %>%
-  ggplot(aes(x = x_key, y = PFU, fill = interaction(group, pair_id), group = pair_id)) +
-  stat_summary(fun = mean, geom = "bar", width = 0.7,
-               position = position_dodge2(preserve = "single")) +
-  geom_hline(yintercept = 1, linetype = "dotted", linewidth = 1, color = 'red3') +
-  geom_vline(xintercept = 4.5, linetype = "dashed") +
-  facet_grid(rows = vars(genotype), cols = vars(group), scales = "free_x",
-             drop = TRUE, labeller = as_labeller(name_map), switch = "y") +
-  scale_fill_viridis_d(name = "ferret", end = 0.8, option = "cividis") +
-  ## nested guide split expt_day
-  scale_x_discrete(name = "Day",
-                   guide = ggh4x::guide_axis_nested(delim = "_")) +
-  scale_y_continuous(breaks = c(0:7)) +
-  labs(y = "Viral Titers (log10 PFU / ml)") +
-  theme_bw() +
-  theme(legend.position = "none") #-> geno_d
-
-###
-
-## tissue titer data
-tis <- read.csv("Source_Data/Figure_1_source_data_tissue.csv", header = TRUE, check.names = FALSE)
-
-virus_order  <- c("CO137", "CA147", "WA239", "BC")
-
-tis <- tis %>% pivot_longer(
-  cols = c(blood:rs),
-  names_to = "Tissue",
-  values_to = "PFU") %>%
-  mutate(PFU = log10(PFU),
-         Virus = fct_relevel(Virus, virus_order)) %>%
-  mutate(Tissue = fct_relevel(Tissue, "blood", "lung", "trachea", "nt", "brain", 
-                              "ob", "spleen", "liver", "intestine", "rs"),
-         Tissue = fct_recode(Tissue, "Blood" = "blood", "Lung" = "lung",
-                             "Trachea" = "trachea", "Nasal Tur" = "nt", "Brain" = "brain",
-                             "Olfact Bulb" = "ob", "Spleen" = "spleen", "Liver" = "liver",
-                             "Intestine" = "intestine", "Rect Swab" = "rs"))
-
-virus_labels <- c("CO137.d3" = "CO/137 d3 B3.13",
-                  "CA147.d4" = "CA/147 d4 B3.13", "CA147.d5" = "CA/147 d5 B3.13",
-                  "WA239.d3" = "WA/239 d3 D1.1",
-                  "BC.d4" = "BC/PHL d4 D1.1", "BC.d5" = "BC/PHL d5 D1.1")
-
-virusday_order <- c("CO137.d3", "CA147.d4", "CA147.d5",
-                    "WA239.d3", "BC.d4", "BC.d5")
-
-tis %>% ggplot(aes(x = Tissue, y = PFU, fill = interaction(Virus, day), 
-                   group = interaction(ferret, Virus))) +
-  stat_summary(fun = mean, geom = "bar", width = 0.7,
-               position = position_dodge2(preserve = "single")) +
-  scale_fill_viridis_d(name = "Virus", end = 0.9, option = "inferno",
-                       labels = virus_labels, limits = virusday_order,
-                       breaks = virusday_order, ) +
-  scale_y_continuous(breaks = 0:9) +
-  geom_hline(yintercept = 1, linetype = "dotted", linewidth = 1, color = 'red3') +
-  labs(y = "Viral Titers (log10 PFU / ml or g)", x = NULL) +
-  theme_bw() +
-  theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 1)) #-> plot_tis
-
-## patchwork and export
-pfu_plot <- geno_b / geno_d / plot_tis
-
-# ragg::agg_tiff(filename = "Figure 1 TJK R version.tiff",
-#                width = 6.7, height = 7, units = 'in', res = 600,
-#                scaling = 0.75, compression = "lzw")
-# plot(pfu_plot)
-# invisible(dev.off())
+## Creation of the figure from GraphPad Prisim
 
 ########################################################################################
 
@@ -1417,4 +1301,5 @@ ggplot(norm_data2, aes(x = RNA_NW, y = RNA_Air, color = factor(ferret))) +
 ##########################################################################################
 
 ##########################################################################################
+
 
